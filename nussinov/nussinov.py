@@ -1,3 +1,6 @@
+"""
+RNAのfoldingを予測する。
+"""
 class Nussinov:
     def __init__(self):
         self.bp = [("a","u"),("c","g"),("g","u")]
