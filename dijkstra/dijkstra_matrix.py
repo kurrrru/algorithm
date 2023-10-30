@@ -51,7 +51,7 @@ class Dijkstra:
                     min_d_index = j
             if min_d_index == -1: break
             used[min_d_index] = True
-            for j in len(self.edge[min_d_index]):
+            for j in range(self.num_node):
                 cost = self.edge[min_d_index][j]
                 if used[j]: continue
                 if self.d[min_d_index] + cost < self.d[j]:
