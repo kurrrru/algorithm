@@ -12,7 +12,7 @@ struct Dijkstra {
     Key** edge;
     Key* dist;
     Key* dijkstra_heap() {
-        priority_queue<long long> heap;
+        priority_queue<long long, vector<long long>, greater<long long>> heap;
         heap.push(start);
         bool* used = (bool*)malloc(num_node * sizeof(bool));
         fill_n(used, num_node, false);
