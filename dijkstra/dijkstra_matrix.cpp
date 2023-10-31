@@ -34,6 +34,7 @@ struct Dijkstra {
                 }
             }
         }
+        free(used);
         return dist;
     }
     public:
@@ -80,6 +81,7 @@ struct Dijkstra {
                 }
             }
         }
+        free(used);
         return dist;
     }
     ~Dijkstra() {
