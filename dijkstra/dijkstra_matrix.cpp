@@ -1,6 +1,3 @@
-/*
-後で確認すること: デコンストラクタで二重解放が起きていないかの確認
-*/
 #include<bits/stdc++.h>
 using namespace std;
 
