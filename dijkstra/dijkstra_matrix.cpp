@@ -53,7 +53,7 @@ struct Dijkstra {
     }
     Key* dijkstra(int from, bool using_heap = true) {
         start = from;
-        if (using_heap) dijkstra_heap();
+        if (using_heap) return dijkstra_heap();
         dist[start] = 0;
         bool* used = (bool*)malloc(num_node * sizeof(bool));
         fill_n(used, num_node, false);
