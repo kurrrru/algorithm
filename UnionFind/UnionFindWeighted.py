@@ -4,7 +4,7 @@ class UnionFind:
         self.rank: list[int] = [1] * n
         self.diff_weight: list[int|float] = [0] * n
     
-    def find(self, x: int) -> list[int|float]:
+    def find(self, x: int) -> int:
         if self.parent[x] == -1: return x
         root = self.find(self.parent[x])
         self.diff_weight[x] += self.diff_weight[self.parent[x]]
