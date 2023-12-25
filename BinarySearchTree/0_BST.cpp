@@ -2,11 +2,11 @@
 template<typename Key>
 struct Node {
     Key value;
-    Node<Key> *ch[2];
-    Node<Key>(Key value) : value(value) {ch[0] = ch[1] = NULL;}
+    Node<Key> *child[2];
+    Node<Key>(Key value) : value(value) {child[0] = child[1] = NULL;}
     friend std::ostream &operator<<(std::ostream &stream, const Node<Key> &t) {
         if (!(&t)) {stream << "";}
-        else {stream << " (" << *t.ch[0] << "[" << t.value << "]" << *t.ch[1] << ") ";}       
+        else {stream << " (" << *t.child[0] << "[" << t.value << "]" << *t.child[1] << ") ";}       
         return stream;
     }
 };
@@ -16,29 +16,29 @@ struct BST {
     BST() {root = NULL;}
     Node<Key> *insert(Node<Key> *t, Key value) {
         if (!t) {return new Node<Key>(value);}
-        t->ch[value>t->value] = insert(t->ch[value>t->value], value);
+        t->child[value>t->value] = insert(t->child[value>t->value], value);
         return t;
     }
     void insert(Key value) {root = insert(root, value);}
     Node<Key> *search(Node<Key> *t, Key value) {
         if (!t) {return NULL;}
         if (t->value == value) {return t;}
-        return search(t->ch[value>t->value], value); 
+        return search(t->child[value>t->value], value); 
     }
     Node<Key> *search(Key value) {return search(root, value);}
     bool erase(Node<Key> *t, Key value) {
         if (!t) {return false;}
-        Node<Key> *c = t->ch[value>t->value];
+        Node<Key> *c = t->child[value>t->value];
         if (!c) {return false;}
         if (c->value != value) {return erase(c, value);}
-        if (!c->ch[0] || !c->ch[1]) {
-            t->ch[value>t->value] = c->ch[!(c->ch[0])];
+        if (!c->child[0] || !c->child[1]) {
+            t->child[value>t->value] = c->child[!(c->child[0])];
             delete c;
         } else {
-            Node<Key> *s = c->ch[1], *p = c;
-            while (s->ch[0]) {
+            Node<Key> *s = c->child[1], *p = c;
+            while (s->child[0]) {
                 p = s;
-                s = s->ch[0];
+                s = s->child[0];
             }
             Key s_value = s->value;
             erase(p,s->value);
@@ -58,8 +58,8 @@ struct BST {
     private:
     void free_memory(Node<Key> *t) {
         if (!t) return;
-        free_memory(t->ch[0]);
-        free_memory(t->ch[1]);
+        free_memory(t->child[0]);
+        free_memory(t->child[1]);
         delete t;
     }
 };
