@@ -1,67 +1,62 @@
 #include<iostream>
+template<typename Key>
 struct Node {
-    int val;
-    Node *ch[2];
-    Node(int val) : val(val) {ch[0] = ch[1] = NULL;}
-    friend std::ostream &operator<<(std::ostream &stream, const Node &t) {
+    Key value;
+    Node<Key> *ch[2];
+    Node<Key>(Key value) : value(value) {ch[0] = ch[1] = NULL;}
+    friend std::ostream &operator<<(std::ostream &stream, const Node<Key> &t) {
         if (!(&t)) {stream << "";}
-        else {stream << " (" << *t.ch[0] << "[" << t.val << "]" << *t.ch[1] << ") ";}       
+        else {stream << " (" << *t.ch[0] << "[" << t.value << "]" << *t.ch[1] << ") ";}       
         return stream;
     }
 };
+template<typename Key>
 struct BST {
-    Node *root;
+    Node<Key> *root;
     BST() {root = NULL;}
-    Node *insert(Node *t, int val) {
-        if (!t) {return new Node(val);}
-        t->ch[val>t->val] = insert(t->ch[val>t->val], val);
+    Node<Key> *insert(Node<Key> *t, Key value) {
+        if (!t) {return new Node<Key>(value);}
+        t->ch[value>t->value] = insert(t->ch[value>t->value], value);
         return t;
     }
-    void insert(int val) {root = insert(root, val);}
-    Node *search(Node *t, int val) {
+    void insert(Key value) {root = insert(root, value);}
+    Node<Key> *search(Node<Key> *t, Key value) {
         if (!t) {return NULL;}
-        if (t->val == val) {return t;}
-        return search(t->ch[val>t->val], val); 
+        if (t->value == value) {return t;}
+        return search(t->ch[value>t->value], value); 
     }
-    Node* search(int val) {return search(root, val);}
-    bool erase(Node *t, int val) {
+    Node<Key> *search(Key value) {return search(root, value);}
+    bool erase(Node<Key> *t, Key value) {
         if (!t) {return false;}
-        Node *c = t->ch[val>t->val];
+        Node<Key> *c = t->ch[value>t->value];
         if (!c) {return false;}
-        if (c->val != val) {return erase(c, val);}
+        if (c->value != value) {return erase(c, value);}
         if (!c->ch[0] || !c->ch[1]) {
-            t->ch[val>t->val] = c->ch[!(c->ch[0])];
+            t->ch[value>t->value] = c->ch[!(c->ch[0])];
             delete c;
         } else {
-            Node *s = c->ch[1], *p = c;
+            Node<Key> *s = c->ch[1], *p = c;
             while (s->ch[0]) {
                 p = s;
                 s = s->ch[0];
             }
-            int s_val = s->val;
-            erase(c,s->val);
-            c->val = s_val;
-
-
-            // p->ch[s->val>p->val] = s->ch[1];
-            // t->ch[val>t->val] = s;
-            // s->ch[0] = c->ch[0];
-            // s->ch[1] = c->ch[1];
-            // delete c;
+            Key s_value = s->value;
+            erase(c,s->value);
+            c->value = s_value;
         }
         return true;
     }
-    bool erase(int val) {return erase(root, val);}
+    bool erase(Key value) {return erase(root, value);}
     ~BST() {
         free_memory(root);
         root = NULL;
     }
-    friend std::ostream &operator<<(std::ostream &stream, const BST &T) {
-        stream << *T.root;
+    friend std::ostream &operator<<(std::ostream &stream, const BST &tree) {
+        stream << *tree.root;
         return stream;
     }
     private:
-    void free_memory(Node *t) {
+    void free_memory(Node<Key> *t) {
         if (!t) return;
         free_memory(t->ch[0]);
         free_memory(t->ch[1]);
@@ -69,7 +64,7 @@ struct BST {
     }
 };
 void test() {
-    BST t = BST();
+    BST<int> t{};
     t.insert(1);
     t.insert(5);
     t.insert(6);
