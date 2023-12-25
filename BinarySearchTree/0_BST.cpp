@@ -89,7 +89,6 @@ void test() {
     std::cout << t << std::endl;
     t.erase(6); // 左右の子, 右の子は左の子を持つ
     std::cout << t << std::endl;
-    t.~BST();
 }
 
 int main() {
