@@ -41,7 +41,7 @@ struct BST {
                 s = s->child[0];
             }
             Key s_value = s->value;
-            erase(p, s->value);
+            erase(p, s_value);
             c->value = s_value;
         }
         return true;
