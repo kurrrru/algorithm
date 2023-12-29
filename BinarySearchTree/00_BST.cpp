@@ -10,9 +10,8 @@ class BST{
             if (!(&t)) {return stream << "";}
             else {return stream << " (" << *t.child[0] << "[" << t.value << "]" << *t.child[1] << ") ";}       
         }
-    }; 
+    } *root; 
     Key Key_INF;
-    Node *root;
     Node *search(Node *&t, Key value) {
         if (!t) {return NULL;}
         if (t->value == value) {return t;}
