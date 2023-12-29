@@ -1,7 +1,7 @@
 #include<iostream>
 
 template<typename Key>
-class BST {
+class BST{
     struct Node {
         Key value;
         Node *child[2];
