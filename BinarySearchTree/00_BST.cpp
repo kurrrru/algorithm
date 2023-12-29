@@ -89,7 +89,7 @@ void test() {
     cout << t << endl;
     t.erase(6); // 左右の子, 右の子は左の子を持つ
     cout << t << endl;
-    t.erase(1);
+    t.erase(1); // 根
     cout << t << endl;
 }
 
