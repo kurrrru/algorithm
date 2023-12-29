@@ -13,7 +13,7 @@ class BST{
     }; 
     Key Key_INF;
     Node *root;
-    Node *search(Node *t, Key value) {
+    Node *search(Node *&t, Key value) {
         if (!t) {return NULL;}
         if (t->value == value) {return t;}
         return search(t->child[value>t->value], value); 
@@ -91,6 +91,9 @@ void test() {
     cout << t << endl;
     t.erase(1); // 根
     cout << t << endl;
+    cout << *t.search(5) << endl;
+    cout << *t.search(4) << endl;
+    cout << *t.search(8) << endl;
 }
 
 int main() {
