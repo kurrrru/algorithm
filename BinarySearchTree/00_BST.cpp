@@ -7,9 +7,8 @@ class BST{
         Node *child[2];
         Node(Key value) : value(value) {child[0] = child[1] = NULL;}
         friend std::ostream &operator<<(std::ostream &stream, const Node &t) {
-            if (!(&t)) {stream << "";}
-            else {stream << " (" << *t.child[0] << "[" << t.value << "]" << *t.child[1] << ") ";}       
-            return stream;
+            if (!(&t)) {return stream << "";}
+            else {return stream << " (" << *t.child[0] << "[" << t.value << "]" << *t.child[1] << ") ";}       
         }
     }; 
     Key Key_INF;
@@ -56,8 +55,7 @@ public:
     Node *search(Key value) {return search(root->child[0], value);}
     bool erase(Key value) {return erase(root, value);}
     friend std::ostream &operator<<(std::ostream &stream, const BST &tree) {
-        stream << *tree.root->child[0];
-        return stream;
+        return stream << *tree.root->child[0];
     }
     ~BST() {
         free_memory(root);
