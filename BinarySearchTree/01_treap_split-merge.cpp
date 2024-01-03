@@ -69,8 +69,6 @@ public:
     Node *search(Key key) {return search(root, key);}
     void insert(Key key) {root = insert(root, new Node(key, rnd.random()));}
     bool erase(Key key) {return erase(root, key);}
-    Key min(Node *t) {return (t->child[0]) ? min(t->child[0]) : t->key;}
-    Key max(Node *t) {return (t->child[1]) ? max(t->child[1]) : t->key;}
 
     friend std::ostream &operator<<(std::ostream &stream, const Treap &tree) {
         return stream << tree.root;
