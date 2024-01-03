@@ -19,7 +19,7 @@ struct Treap {
         Node(Key key, unsigned priority) : key(key), priority(priority) {child[0] = child[1] = nullptr;}
         friend std::ostream &operator<<(std::ostream &stream, const Node *t) {
             if (!t) {return stream << "";} 
-            else {return stream << " (" << t->child[0] << "[" << t->key << /*"," << t->priority <<*/  "]" << t->child[1] << ") ";}       
+            else {return stream << " (" << t->child[0] << "[" << t->key << "]" << t->child[1] << ") ";}       
         }
     } *root; 
     Node *search(Node *&t, Key key) {
