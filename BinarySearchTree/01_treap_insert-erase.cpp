@@ -60,17 +60,15 @@ struct Treap {
         r = root->child[1];
     }
     void merge(Node *&t, Node *l, Node *r) {
-        Key x;
-        if (!l || !r) {x = (l) ? max(l) + 1 : min(r) + 1}
-        else {x = (max_not_empty(l) + min_not_empty(r)) / 2;}
-        t->key = x;
-        t->priority = (unsigned)-1;
-        t->child[0] = l;
-        t->child[1] = r;
-        erase(t, x);
+        if (!l || !r) {t = l ? l : r;}
+        else if (l->priority > r->priority) {
+            t = l; 
+            merge(t->child[1], l->child[1], r);
+        } else {
+            t = r; 
+            merge(t->child[0], l, r->child[0]);
+        }
     }
-    Key min_not_empty(Node *t) {return (t->child[0]) ? min(t->child[0]) : t->key;}
-    Key max_not_empty(Node *t) {return (t->child[1]) ? max(t->child[1]) : t->key;}
 public:
     Treap(unsigned seed = 1) : rnd(seed), root(nullptr) {}
     Node *search(Key key) {return search(root, key);}
