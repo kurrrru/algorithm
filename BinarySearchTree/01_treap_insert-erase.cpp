@@ -61,21 +61,21 @@ struct Treap {
     }
     void merge(Node *&t, Node *l, Node *r) {
         Key x;
-        if (!l || !r) {x = (l) ? max(l) + 1 : min(r) + 1;}
-        else {x = (max(l) + min(r)) / 2;}
+        if (!l || !r) {x = (l) ? max(l) + 1 : min(r) + 1}
+        else {x = (max_not_empty(l) + min_not_empty(r)) / 2;}
         t->key = x;
         t->priority = (unsigned)-1;
         t->child[0] = l;
         t->child[1] = r;
         erase(t, x);
     }
+    Key min_not_empty(Node *t) {return (t->child[0]) ? min(t->child[0]) : t->key;}
+    Key max_not_empty(Node *t) {return (t->child[1]) ? max(t->child[1]) : t->key;}
 public:
     Treap(unsigned seed = 1) : rnd(seed), root(nullptr) {}
     Node *search(Key key) {return search(root, key);}
     void insert(Key key) {root = insert(root, key);}
     bool erase(Key key) {return erase(root, key);}
-    Key min(Node *t) {return (t->child[0]) ? min(t->child[0]) : t->key;}
-    Key max(Node *t) {return (t->child[1]) ? max(t->child[1]) : t->key;}
 
     friend std::ostream &operator<<(std::ostream &stream, const Treap &tree) {
         return stream << tree.root;
