@@ -60,7 +60,9 @@ struct Treap {
         r = root->child[1];
     }
     void merge(Node *&t, Node *l, Node *r) {
-        Key x = (max(l) + min(r)) / 2;
+        Key x;
+        if (!l || !r) {x = (l) ? max(l) + 1 : min(r) + 1;}
+        else {x = (max(l) + min(r)) / 2;}
         t->key = x;
         t->priority = (unsigned)-1;
         t->child[0] = l;
