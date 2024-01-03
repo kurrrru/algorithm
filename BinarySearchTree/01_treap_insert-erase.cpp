@@ -54,16 +54,12 @@ struct Treap {
         t = s;        
         return erase(s->child[1-b], key);
     }
-    void split(Node *t, Node *&l, Node *&r, Key key) {
-        // 優先度最強でキーがkeyであるノードを挿入する
-        // rootの左右の部分木がl,r
+    void split(Node *t, Key key, Node *&l, Node *&r) {
         root = insert(root, key, false, (unsigned)-1);
         l = root->child[0];
         r = root->child[1];
     }
     void merge(Node *&t, Node *l, Node *r) {
-        // max(l)<x<min(r)を満たすxをキーとし、優先度最強のノードの左右の部分木にl,rを置く
-        // そのノードを削除
         Key x = (max(l) + min(r)) / 2;
         t->key = x;
         t->priority = (unsigned)-1;
