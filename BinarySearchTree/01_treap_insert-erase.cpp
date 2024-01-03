@@ -1,6 +1,5 @@
 #include<iostream>
 
-
 template<typename Key>
 struct Treap {
     struct xorshift {
